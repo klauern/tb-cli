@@ -8,8 +8,8 @@ module Tbox
       def run
         opts = Slop.new(:strict => true) do
           banner "Usage: tb [options]"
-          on :c, :context, "Deploy to context [location]"
-          on :a, :app, "Application Name [name]"
+          on :c, :context, "Deploy to context [location]", true, :as => String
+          on :a, :app, "Application Name [name]", true, :as => String
           on :s, :sinatra, "Use Sinatra?"
           on :h, :help, "Show detailed Help"
         end
@@ -28,7 +28,15 @@ module Tbox
       end
 
       def create_tb_app(opts)
-
+        if opts.sinatra?
+          puts "Yay I like Sinatra, too"
+        end
+        if opts.context?
+          puts "You want to put the app in /#{opts[:context]}"
+        end
+        if opts.app?
+          puts "App name will be called #{opts[:app]}"
+        end
       end
     end
   end
