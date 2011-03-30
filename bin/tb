@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+tb_template_path = File.expand_path('../../lib', __FILE__)
+$:.unshift(tb_template_path) if File.directory?(tb_template_path) && !$:.include?(tb_template_path)
+
+require 'rubygems'
+require 'tbox-template'
+Tbox::Template::Cli.new.run

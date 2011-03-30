@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "sinatra"
   s.add_dependency "slop"
+
+  s.executables << "tb"
   
   s.rubyforge_project = "tbox-template"
 
