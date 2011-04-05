@@ -5,4 +5,12 @@ $:.unshift(tb_template_path) if File.directory?(tb_template_path) && !$:.include
 
 require 'rubygems'
 require 'tbox-template'
-Tbox::Template::Cli.new.run
+require 'thor'
+
+class TboxTemplate < Thor
+
+  def new(type, options)
+  end
+
+end
+TboxTemplate.start

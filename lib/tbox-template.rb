@@ -1,6 +1,9 @@
-require 'slop'
+require 'thor'
 
-module Tbox
+module Tbox < Thor
+
+
+
   module Template
 
     class Cli
