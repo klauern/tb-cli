@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "tbox-template/version"
+require "tb-cli/version"
 
 Gem::Specification.new do |s|
-  s.name        = "tbox-template"
+  s.name        = "tb-cli"
   s.version     = Tbox::Template::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nick Klauer"]
@@ -16,12 +16,11 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "sinatra"
-  #s.add_dependency "slop"
   s.add_dependency "thor"
 
   s.executables << "tb"
   
-  s.rubyforge_project = "tbox-template"
+  s.rubyforge_project = "tb-cli"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
