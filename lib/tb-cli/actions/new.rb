@@ -1,11 +1,9 @@
-
-module Actions
-  class New < TboxBase
-    namespace :new
+module Things
+  class Create < Tbox
+    namespace :fun
 
     desc "rack", "Create a new Rack Application Template"
     def rack
     end
-
   end
 end

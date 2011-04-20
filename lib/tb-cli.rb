@@ -3,7 +3,11 @@ require 'thor'
 #$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 require 'tb-cli/actions/new'
 
+$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
+
+module Things
 class Tbox < Thor
+  require 'tb-cli/actions/new'
 
   default_task :show_banner
 
@@ -24,5 +28,4 @@ application template provided by Torquebox: http://torquebox.org/documentation/D
 rails new my_app -m $TORQUEBOX_HOME/share/rails/template.rb
   
   BAN
-
 end
