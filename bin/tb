@@ -2,4 +2,4 @@
 require 'tb-cli'
 $: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 
-Things::Tbox.start
+Tbox.start

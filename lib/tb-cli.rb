@@ -1,19 +1,15 @@
+$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 require 'rubygems'
 require 'thor'
-#$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 require 'tb-cli/actions/new'
 
-$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
-
-module Things
 class Tbox < Thor
-  require 'tb-cli/actions/new'
 
-  default_task :show_banner
+  default_task :banner
 
   # Default task to show when no options are passed in.
-  desc "help", "Show this help message"
-  def show_banner
+  desc "banner", "Show this help message"
+  def banner
     puts BANNER
     help
   end
