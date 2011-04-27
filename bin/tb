@@ -1,16 +1,9 @@
 #!/usr/bin/env ruby
+require 'tb-cli'
+#tb_template_path = File.expand_path('../../lib', __FILE__)
+#$:.unshift(tb_template_path) if File.directory?(tb_template_path) && !$:.include?(tb_template_path)
 
-tb_template_path = File.expand_path('../../lib', __FILE__)
-$:.unshift(tb_template_path) if File.directory?(tb_template_path) && !$:.include?(tb_template_path)
-
-require 'rubygems'
-require 'tbox-template'
-require 'thor'
-
-class TboxTemplate < Thor
-
-  def new(type, options)
-  end
-
-end
-TboxTemplate.start
+#require 'rubygems'
+#require 'tbox-template'
+#require 'thor'
+Tbox.start

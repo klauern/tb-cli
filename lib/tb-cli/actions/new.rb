@@ -1,7 +1,6 @@
+
 module Actions
-
-  class New < Thor
-
+  class New < TboxBase
     namespace :new
 
     desc "rack", "Create a new Rack Application Template"
