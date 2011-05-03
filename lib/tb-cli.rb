@@ -43,5 +43,4 @@ rails app, please use the application template provided by Torquebox
 
   end
 end
-
 Tbox::Cli.start
