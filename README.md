@@ -27,39 +27,39 @@ List of actions
       * `auth` - configure your authorization settings
       * `pooling` - Runtime pooling options
 
-### `application`
+### application
 To Be Implemented
 
-### `web`
+### web
 To Be Implemented
 
-### `ruby`
+### ruby
 To Be Implemented
 
-### `environment`
+### environment
 To Be Implemented
 
-### `queue`
+### queue
 To Be Implemented
 
-### `topic`
+### topic
 To Be Implemented
 
-### `messaging`
+### messaging
 To Be Implemented
 
-### `task`
+### task
 To Be Implemented
 
-### `job`
+### job
 To Be Implemented
 
-### `service`
+### service
 To Be Implemented
 
-### `auth`
+### auth
 To Be Implemented
 
-### `pooling`
+### pooling
 To Be Implemented
 
