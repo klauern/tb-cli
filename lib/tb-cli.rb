@@ -5,11 +5,12 @@ require 'thor/group'
 
 module Tbox
   class Cli < Thor
+    require 'tb-cli/descriptions'
     require 'tb-cli/cli/initialize'
+    require 'tb-cli/cli/add'
 
-    #register Tbox::Create, "create", "create", "Awesome new things"
-    desc "init", "initialize Torquebox.yml file"
-    subcommand 'init', Tbox::Initialize
+    register Tbox::Initialize, "init", "init", "initialize Torquebox.yml file"
+    register Tbox::Add, "add", "add [component]", ADD
 
     def help(meth=nil)
       puts BANNER
