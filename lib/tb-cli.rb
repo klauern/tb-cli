@@ -21,7 +21,7 @@ module Tbox
     BANNER = <<-BAN
 Torquebox CLI  
 
-    tb-cli [action] [options]     # See below for more details on actions
+    tb [action] [options]     # See below for more details on actions
 
 Use this template generator to make quick Rack applications.  If you want a 
 rails app, please use the application template provided by Torquebox 

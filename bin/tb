@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'tb-cli'
 $: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 
-Tbox.start
+require 'tb-cli'

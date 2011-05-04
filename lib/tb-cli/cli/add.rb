@@ -1,12 +1,16 @@
 module Tbox
   class Add < Thor
 
+    require 'tb-cli/cli/application'
+
     include Thor::Actions
     
-    desc "add application", "Application"
-    def application
-      puts "you added an application setting"
-    end
+    register Tbox::AddApp, "app", "add app", "Add Application components (root, env)"
+
+    #desc "add application", "Application"
+    #def application
+      #puts "you added an application setting"
+    #end
 
     desc "add web", "Web"
     def web
@@ -28,20 +32,16 @@ module Tbox
     method_option :durable => false
     def queue
       y = ConfigFile.new
-      queues = y.config["queues"] || {}
-      queues['/queues/' + options.name] = nil
-      y.config["queues"] = queues
-      puts y.yaml
+      y.add_config('queues', "/queues/#{options.name}")
+      replace_yaml(y.yaml)
     end
 
     desc "add topic", "Topic"
     method_option :name, :type => :string, :required => true
     def topic
-      y = ConfigFile.new
-      topics = y.config["topics"] || {}
-      topics['/topics/' + options.name] = nil
-      y.config["topics"] = topics
-      puts y.yaml
+      y = ConfigFile.new destination_root
+      y.add_config('topics', "/topics/#{options.name}")
+      replace_yaml(y.yaml)
     end
 
     desc "add messaging", "Messaging"
@@ -73,17 +73,29 @@ module Tbox
       puts "add some task"
     end
 
-    desc "add job", "Job"
+    desc "add job", "Jobs"
+    method_option :job_name, :type => :string, :required => true
+    method_option :cron, :type => :string, :required => true, :desc => <<-CRON
+    crontab-like entry,  Similar to the following:
+      
+        '0 */5 * * * ?'
+    CRON
+    method_option :description, :type => :string, :desc => "Optional Description"
     def job
-      puts "add a job"
+      puts "job was attempted to be created"
     end
 
     desc "add service", "Service"
+    method_option :name, :type => :string, :desc => "Service Name"
+    method_option :params, :type => :hash, :desc => "key:value pairs to supply for this service"
+    method_option :singleton, :type => :boolean, :desc => "Will this be a singleton operation?"
     def service
       puts "add a service"
     end
 
     desc "add auth", "Auth"
+    method_option :auth_type, :type => :string, :desc => "Authentication type"
+    method_option :domain, :type => :string, :desc => "domain to authenticate against"
     def auth
       puts "add some auth things"
     end
@@ -98,6 +110,14 @@ module Tbox
       super
     end
 
+    no_tasks do
+
+      def replace_yaml(yaml_f)
+        puts "Saving:\n"
+        remove_file('torquebox.yml')
+        create_file('torquebox.yml', yaml_f)
+      end
+    end
   end
 end
 
