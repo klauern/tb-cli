@@ -8,6 +8,7 @@ module Tbox
     require 'tb-cli/descriptions'
     require 'tb-cli/cli/initialize'
     require 'tb-cli/cli/add'
+    require 'tb-cli/config_file'
 
     register Tbox::Initialize, "init", "init", "initialize Torquebox.yml file"
     register Tbox::Add, "add", "add [component]", ADD
