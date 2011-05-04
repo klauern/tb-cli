@@ -5,16 +5,36 @@ module Tbox
 
     include Thor::Actions
     
-    register Tbox::AddApp, "app", "add app", "Add Application components (root, env)"
 
-    #desc "add application", "Application"
-    #def application
-      #puts "you added an application setting"
-    #end
+    desc "add application", "Application"
+    method_option :root_loc, :type => :string, :desc => "root for your application"
+    method_option :env, :type => :string, :desc => "Environment to run under (development, test, production)"
+    def application
+      y = ConfigFile.new destination_root
+      if options.root_loc || options.env
+        if options.root_loc
+          y.add_config('application', 'root', options.root_loc)
+        elsif options.env
+          y.add_config('application', 'env', options.env)
+        end
+        replace_yaml(y.yaml)
+      else
+        puts "You need to specify either --root-loc or --env"
+      end
+    end
 
     desc "add web", "Web"
+    method_option :rackup, :type => :string, :default => "config.ru", :desc => "Rackup file (default config.ru)"
+    method_option :host, :type => :string, :default => "localhost", :desc => "virtual host to run as (default localhost)"
+    method_option :context, :type => :string, :default => "/", :desc => "path under http://host/ to deploy to (default: '/')"
+    method_option :static, :type => :string, :desc => "Any static web content provided should be put here (default: none)"
     def web
-      puts "you added a web component"
+      y = ConfigFile.new destination_root
+      y.add_config('web', 'rackup', options.rackup) if options.rackup
+      y.add_config('web', 'host', options.host) if options.host
+      y.add_config('web', 'context', options.context) if options.context
+      y.add_config('web', 'static', options.static) if options.static
+      replace_yaml(y.yaml)
     end
 
     desc "add ruby", "Ruby"
