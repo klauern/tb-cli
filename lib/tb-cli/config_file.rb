@@ -25,6 +25,16 @@ module Tbox
       @config.to_yaml
     end
 
+    def add_config(options, meth, config, value=nil)
+      conf = @config[meth.to_s] || {}
+      # don't know how to call this, but if config is passed as "name", I want
+      # to call options.name
+      conf[options.config.to_s] = value
+      @config[meth.to_s] = conf
+      puts yaml
+    end
+
+
   end
 end
 
