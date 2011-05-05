@@ -1,0 +1,20 @@
+Here's a new application
+========================
+
+Nothing fancy, so if you're looking for more details on how to 
+actually generate a nice Torquebox project, there is a wealth
+of good information to be found on the Torquebox documentation:
+
+  http://torquebox.org/documentation/1.0.0
+
+What's in this project?
+-----------------------
+
+There are currently a handful of base files to make your first
+Torquebox app:
+
+  - app.rb          Your Application
+  - config.ru       Your Rackup file (see http://m.onkey.org/ruby-on-rack-1-hello-rack)
+  - Rakefile        See http://torquebox.org/documentation/1.0.0/deployment.html#deploy-using-rake
+  - torquebox.yml   Your Torquebox YAML file for configuring all the fancy Torquebox-y things
+  - README          This file

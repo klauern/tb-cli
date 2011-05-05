@@ -1,7 +1,6 @@
 require 'sinatra/base'
-# require 'torquebox-messaging'
 
-class App < Sinatra::Base
+class <%= @project.capitalize %> < Sinatra::Base
 
   get '/' do
     'Hello world!'

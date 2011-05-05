@@ -11,9 +11,9 @@ module Tbox
       if setup
         say "awesome!", Thor::Color::BOLD + Thor::Color::RED, false
         say " let's get to work"
-        project = ask "Name of project: " 
-        if project
-          gen_project project
+        @project = ask "Name of project: " 
+        if @project
+          gen_project @project
         else
           say "You need to supply a project name"
         end
