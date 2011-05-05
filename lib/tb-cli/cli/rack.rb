@@ -28,14 +28,10 @@ module Tbox
         say_status "new_project", project_name
         Tbox::Rack.source_root(File.expand_path(File.join(__FILE__, "..", "..")))
         empty_directory(project_name)
+        empty_directory(project_name + "/lib")
         %w{ app.rb config.ru Rakefile torquebox.yml README Gemfile }.each { |f|
           template("templates/#{f}.tt", "#{project_name}/#{f}")
         }
-        #template('templates/app.rb.tt', "#{project_name}/app.rb")
-        #template('templates/config.ru.tt', "#{project_name}/config.ru")
-        #template('templates/Rakefile.tt', "#{project_name}/Rakefile")
-        #template('templates/torquebox.yml.tt', "#{project_name}/torquebox.yml")
-        #template('templates/README.tt', "#{project_name}/README")
       end
 
       def method_missing(name, *args)
