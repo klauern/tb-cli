@@ -3,14 +3,14 @@ Here's a new application
 
 Nothing fancy, so if you're looking for more details on how to 
 actually generate a nice Torquebox project, there is a wealth
-of good information to be found on the Torquebox documentation:
+of good information to be found in the Torquebox documentation:
 
   http://torquebox.org/documentation/1.0.0
 
 What's in this project?
 -----------------------
 
-There are currently a handful of base files to make your first
+Here are currently a handful of base files to make your first
 Torquebox app:
 
   - app.rb          Your Application
