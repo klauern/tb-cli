@@ -18,6 +18,19 @@ that you can create and spin up quick TB apps.
 
 List of actions
 ---------------
+There are 3 core things I'm trying to tackle:
+  * `tb add` - Add a component (topic, queue, job, task, config, etc) to your
+    `torquebox.yml` file
+  * `tb remove` - Remove one of those
+  * `tb rack` - Generate a project skeleton for your Rack apps
+
+There is a great `template.rb` that is out there for Rails-based apps that you
+want to run on Torquebox.  If that's what you're after, please go there and use
+that:
+    rails new my_app -m $TORQUEBOX_HOME/share/rails/template.rb
+
+Details on Actions
+------------------
   * `tb init` - initialize and create your `torquebox.yml` file for your project
   * `tb add [component]` - add a component to your torquebox application.
     Types of components can be:
@@ -35,6 +48,9 @@ List of actions
       * `service` - Create a long-running service that runs in the background
       * `auth` - configure your authorization settings
       * `pooling` - Runtime pooling options
+
+Not all application components are implemented.  See documentation below for
+more information what is and isn't implemented:
 
 ### application
 To Be Implemented
