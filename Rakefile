@@ -2,6 +2,6 @@ require 'rake/clean'
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-CLOBBER = [ 'pkg/', 'doc/' ]
+CLOBBER.include( 'pkg/', 'doc/' )
 
 task :default => ["spec", "build"]
