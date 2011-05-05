@@ -15,6 +15,7 @@ Torquebox app:
 
   - app.rb          Your Application
   - config.ru       Your Rackup file (see http://m.onkey.org/ruby-on-rack-1-hello-rack)
+  - Gemfile         include the torquebox and torquebox-rake-support gems
   - Rakefile        See http://torquebox.org/documentation/1.0.0/deployment.html#deploy-using-rake
   - torquebox.yml   Your Torquebox YAML file for configuring all the fancy Torquebox-y things
   - README          This file
