@@ -8,13 +8,23 @@ module Tbox
     require 'tb-cli/descriptions'
     require 'tb-cli/cli/initialize'
     require 'tb-cli/cli/add'
+    require 'tb-cli/cli/rack'
+    require 'tb-cli/cli/remove'
     require 'tb-cli/config_file'
 
     register Tbox::Initialize, "init", "init", "initialize Torquebox.yml file"
     register Tbox::Add, "add", "add [component]", ADD
+    register Tbox::Remove, "remove", "remove [component]", REMOVE
+    register Tbox::Rack, "rack", "rack [project_name]", RACK
 
     def help(meth=nil)
       puts BANNER
+      super
+    end
+
+    # override the Basic shell with the colorized one in Thor
+    def self.start(*)
+      Thor::Base.shell = Thor::Shell::Color
       super
     end
 

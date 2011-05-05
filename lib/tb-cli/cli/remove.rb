@@ -85,11 +85,7 @@ module Tbox
 
     desc "remove job", "Jobs"
     method_option :job_name, :type => :string, :required => true
-    method_option :cron, :type => :string, :required => true, :desc => <<-CRON
-    crontab-like entry,  Similar to the following:
-      
-        '0 */5 * * * ?'
-    CRON
+    method_option :cron, :type => :string, :required => true, :desc => "Remove crontab for an entry"
     method_option :description, :type => :string, :desc => "Optional Description"
     def job
       puts "job was attempted to be created"
@@ -100,14 +96,14 @@ module Tbox
     method_option :params, :type => :hash, :desc => "key:value pairs to supply for this service"
     method_option :singleton, :type => :boolean, :desc => "Will this be a singleton operation?"
     def service
-      puts "add a service"
+      puts "remove a service"
     end
 
     desc "remove auth", "Auth"
     method_option :auth_type, :type => :string, :desc => "Authentication type"
     method_option :domain, :type => :string, :desc => "domain to authenticate against"
     def auth
-      puts "add some auth things"
+      puts "removing authorization for a domain or type"
     end
 
     desc "remove pooling", "Pooling"
