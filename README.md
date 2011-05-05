@@ -28,6 +28,7 @@ There are 3 core things I'm trying to tackle:
 There is a great `template.rb` that is out there for Rails-based apps that you
 want to run on Torquebox.  If that's what you're after, please go there and use
 that:
+
     rails new my_app -m $TORQUEBOX_HOME/share/rails/template.rb
 
 Details on Actions
