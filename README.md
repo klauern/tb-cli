@@ -7,6 +7,15 @@ Usage
 
     tb [action] [options]
 
+Why
+---
+
+Torquebox is a really awesome project and I was interested in doing something
+with the efforts.  Since there didn't appear to be any project-generator-type
+thing in place, I decided to make one.  This is as much an experiment with
+Thor as it is an interest in making Torquebox have a command-line application
+that you can create and spin up quick TB apps.
+
 List of actions
 ---------------
   * `tb init` - initialize and create your `torquebox.yml` file for your project

@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.email       = ["klauer@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{Create simple Torquebox templates for your Rack-based applications.}
-  s.description = %q{In creating a new Torquebox integration, there are alot of common files that you would
-                     normally use to set up your context to deploy to, what the name of the app is, and
-                     other general-purpose deployment information.  Simplify that with this gem.}
+  s.description = %q{In creating a new Torquebox integration, there are a few common files that you could
+                     use to set up your context to deploy to, what the name of the app is, and other 
+                     general-purpose deployment information.  Simplify that with this command-line gem.}
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "sinatra"
