@@ -1,10 +1,7 @@
 module Tbox
   class Add < Thor
 
-    require 'tb-cli/cli/application'
-
     include Thor::Actions
-    
 
     desc "add application", "Application"
     method_option :root_loc, :type => :string, :desc => "root for your application"
