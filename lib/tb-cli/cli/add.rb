@@ -118,8 +118,31 @@ module Tbox
     end
 
     desc "add pooling", "Pooling"
+    method_option :subsystem, :type => :string, :desc => "Subsystem type (web, jobs, messaging, services)",
+      :required => true
+    method_option :bounded, :type => :hash, :desc => "min:1, max:3, etc"
+    method_option :shared, :type => :boolean, :desc => "use this if not using bounded pooling"
     def pooling
-      puts "Pooling Options"
+      thing = {}
+      thing["pooling"] = {}
+      case options.subsystem
+      when 'web'
+        if options.bounded
+          puts options.bounded
+          thing["pooling"]["web"] = options.bounded
+          puts thing.to_yaml
+        elsif options.shared
+          thing["pooling"]["web"] = "shared"
+        end
+      when 'jobs'
+        puts "using a jobs pooling"
+      when 'messaging'
+        puts "using messaging"
+      when 'services'
+        puts "using services"
+      else
+        raise "Unknown subsystem.  Must be one of:\n  * web\n  * jobs\n  * messaging\n  * services"
+      end
     end
 
     def help(meth=nil)
