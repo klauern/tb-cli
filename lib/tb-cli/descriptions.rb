@@ -16,7 +16,7 @@ Add a new component to the torquebox.yml file.  The type of component can be:
 
 For more help on a particular subcommand, enter
   
-  tb add [component] help
+  tb add help [component]
 
   COMPONENT
 
@@ -39,7 +39,7 @@ to remove can be the same as with add:
 
 For more help on a particular subcommand, enter
   
-  tb remove [component] help
+  tb remove help [component]
 
   COMPONENT
 
