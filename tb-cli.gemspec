@@ -4,7 +4,7 @@ require "tb-cli/version"
 
 Gem::Specification.new do |s|
   s.name        = "tb-cli"
-  s.version     = Tbox::Template::VERSION
+  s.version     = Tbox::Cli::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nick Klauer"]
   s.email       = ["klauer@gmail.com"]

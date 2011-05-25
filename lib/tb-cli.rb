@@ -5,12 +5,14 @@ require 'thor/group'
 
 module Tbox
   class Cli < Thor
+    require 'tb-cli/camel_case'
     require 'tb-cli/descriptions'
     require 'tb-cli/cli/initialize'
     require 'tb-cli/cli/add'
     require 'tb-cli/cli/rack'
     require 'tb-cli/cli/remove'
     require 'tb-cli/config_file'
+
 
     register Tbox::Initialize, "init", "init", "initialize Torquebox.yml file"
     register Tbox::Add, "add", "add [component]", ADD

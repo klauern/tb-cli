@@ -1,4 +1,3 @@
-
 if ( Rails::VERSION::MAJOR == 2 )
   gem "activerecord-jdbc-adapter", :lib => "arjdbc"
 else
