@@ -34,14 +34,24 @@ module Tbox
       replace_yaml(y.yaml)
     end
 
-    desc "add ruby", "Ruby"
+    desc "add ruby", "Add Ruby Runtime configuration variables"
+    method_option :version, :type => :string, :default => "1.9", :desc => "Ruby Runtime version.  Either 1.8 or 1.9"
+    method_option :compile_mode, :type => :string, :default => "none", :desc => "Compile mode.  Can be 'jit', 'force', or 'off'."
     def ruby
-      puts "you added ruby configs"
+      y = ConfigFile.new destination_root
+      y.add_config('ruby', 'version', options.version) if options.version
+      y.add_config('ruby', 'compile_mode', options.compile_mode) if options.compile_mode
+      replace_yaml(y.yaml)
     end
 
-    desc "add environment", "Environment"
+    desc "add environment", "Add an environment variable, such as MAIL_HOST or REPLY_TO"
+    method_option :options, :type => :hash, :desc => "Add options as you need them: MAIL_HOST:server REPLY_TO:emailaddress, etc., etc."
     def environment
-      puts "adding an environment setting"
+      y = ConfigFile.new destination_root
+      options.each_pari { |k,v|
+        y.add_config('environment', k, v)
+      }
+      replace_yaml(y.yaml)
     end
 
     desc "add queue", "Queue"
