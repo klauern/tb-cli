@@ -208,7 +208,8 @@ module Tbox
     method_option :domain, :type => :string, :desc => "domain to authenticate against", :required => true
     def auth
       y = ConfigFile.new destination_root
-      y.add_config('auth', options.auth_type, options.domain)
+      y.add_config('auth', options.auth_type, { "domain" => options.domain })
+      replace_yaml(y.yaml)
     end
 
     desc "add pooling", "Pooling"
