@@ -191,7 +191,7 @@ module Tbox
       replace_yaml(y.yaml)
     end
 
-    desc "add service", "Service"
+    desc "add service", "Add a background service"
     method_option :name, :type => :string, :desc => "Service Name", :required => true
     method_option :params, :type => :hash, :desc => "key:value pairs to supply for this service"
     method_option :singleton, :type => :boolean, :desc => "Will this be a singleton operation?", :default => false
@@ -204,10 +204,11 @@ module Tbox
     end
 
     desc "add auth", "Auth"
-    method_option :auth_type, :type => :string, :desc => "Authentication type"
-    method_option :domain, :type => :string, :desc => "domain to authenticate against"
+    method_option :auth_type, :type => :string, :desc => "Authentication type", :required => true
+    method_option :domain, :type => :string, :desc => "domain to authenticate against", :required => true
     def auth
-      puts "add some auth things"
+      y = ConfigFile.new destination_root
+      y.add_config('auth', options.auth_type, options.domain)
     end
 
     desc "add pooling", "Pooling"
