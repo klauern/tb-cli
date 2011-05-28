@@ -4,16 +4,23 @@ module Tbox
     include Thor::Actions
 
     desc "add application", "Application"
+    long_desc <<-DESC
+      Add an application component descriptor to your project.  See
+
+      http://torquebox.org/documentation/1.0.1/deployment-descriptors.html#general-application-config-in-descriptor
+
+      for more details.  The two options you have at your disposal are:
+
+      root_loc: location for your project (/path/to/my/app) 
+      env: your environment (development, test, production) 
+    DESC
     method_option :root_loc, :type => :string, :desc => "root for your application"
     method_option :env, :type => :string, :desc => "Environment to run under (development, test, production)"
     def application
       y = ConfigFile.new destination_root
       if options.root_loc || options.env
-        if options.root_loc
-          y.add_config('application', 'root', options.root_loc)
-        elsif options.env
-          y.add_config('application', 'env', options.env)
-        end
+        y.add_config('application', 'root', options.root_loc) if options.root_loc
+        y.add_config('application', 'env', options.env) if options.env
         replace_yaml(y.yaml)
       else
         puts "You need to specify either --root-loc or --env"
@@ -21,6 +28,18 @@ module Tbox
     end
 
     desc "add web", "Web"
+    long_desc <<-DESC
+    Add web-specific configuration to your application.  Since Torquebox can deploy multiple applications
+    under one hostname, extra configuration options are allowed to make deployment easier.  If you want to 
+    specify the specific 'rackup.ru' script for your app, configure with --rackup=location.  You can specify
+    a specific context that this application will be avaialble for (such as /application) by using --context.
+
+    Virtual hosts can also be configured with the --host option.  Finally, you can also specify a location for
+    your static web content can be pointed to by using the --static=location option.
+
+    See http://torquebox.org/documentation/1.0.1/deployment-descriptors.html#web-specific-config-in-descriptor
+    for more details.
+    DESC
     method_option :rackup, :type => :string, :default => "config.ru", :desc => "Rackup file (default config.ru)"
     method_option :host, :type => :string, :default => "localhost", :desc => "virtual host to run as (default localhost)"
     method_option :context, :type => :string, :default => "/", :desc => "path under http://host/ to deploy to (default: '/')"
@@ -34,13 +53,24 @@ module Tbox
       replace_yaml(y.yaml)
     end
 
-    desc "add ruby", "Add Ruby Runtime configuration variables"
-    method_option :version, :type => :string, :default => "1.9", :desc => "Ruby Runtime version.  Either 1.8 or 1.9"
-    method_option :compile_mode, :type => :string, :default => "none", :desc => "Compile mode.  Can be 'jit', 'force', or 'off'."
+    desc "add ruby", "Ruby"
+    long_desc <<-DESC
+    Add Ruby runtime configurations for your web application.  JRuby allows for a couple different runtime options:
+    Ruby interpreter version (1.8 or 1.9 through --version), and compile mode (jit, force, off) through --compile_mode.
+
+    See http://torquebox.org/documentation/1.0.1/deployment-descriptors.html#ruby-runtime-config-in-descriptor
+    for more details.
+    DESC
+    method_option :version, :type => :numeric, :desc => "Ruby interpreter version, either 1.8 or 1.9"
+    method_option :compile_mode, :type => :string, :desc => "Compile mode (jit, force, or off)"
     def ruby
       y = ConfigFile.new destination_root
-      y.add_config('ruby', 'version', options.version) if options.version
-      y.add_config('ruby', 'compile_mode', options.compile_mode) if options.compile_mode
+      if [ 1.8, 1.9 ].include? options.version
+        y.add_config('ruby', 'version', options.version)
+      end
+      if [ 'jit', 'force', 'off' ].include? options.compile_mode
+        y.add_config('ruby', 'compile_mode', options.compile_mode)
+      end
       replace_yaml(y.yaml)
     end
 
