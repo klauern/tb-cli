@@ -101,6 +101,7 @@ module Tbox
     method_option :name, :type => :string, :required => true
     method_option :not_durable, :type => :boolean, :default => false, :desc => "Disable Durable subscriber (at your own risk)"
     def queue
+      # TODO: Add external queues and hosts (see section 7.2.3.3 for details)
       file = 'queues.yml'
       y = ConfigFile.new destination_root, file
       if (options.not_durable && options.name)
@@ -108,20 +109,35 @@ module Tbox
       elsif (options.name)
         y.add_config("/queues/#{options.name}")
       end
-      #require 'pry'
-      #binding.pry
       replace_yaml(y.yaml, file) 
     end
 
-    desc "add topic", "Topic"
+    desc "add topic", "Add a Topic to your application"
+    long_desc <<-DESC
+    Topics are similar to Queues, except that they follow the pub-sub model for messaging.  Currently, the only 
+    option allowed is --name=name_of_topic.  Much more documentation can be found on how to use Topics and Queues,
+    and how they fit into Torquebox on their website:
+
+    http://torquebox.org/documentation/1.0.1/messaging.html
+    DESC
     method_option :name, :type => :string, :required => true
     def topic
-      y = ConfigFile.new destination_root
-      y.add_config('topics', "/topics/#{options.name}")
-      replace_yaml(y.yaml)
+      # TODO: Add external queues and hosts (see section 7.2.3.3 for details)
+      file = 'topics.yml'
+      y = ConfigFile.new destination_root, file
+      y.add_config("/topics/#{options.name}")
+      replace_yaml(y.yaml, file)
     end
 
-    desc "add messaging", "Messaging"
+    desc "add messaging", "Add Messaging handlers for your queues and topics"
+    long_desc <<-DESC
+    Handlers are classes that consume messages on either topics or queues.  Defining which classes are going to handle
+    these messages can be done by specifying the --queue=name_of_queue, as well as the --handler_class=ClassName to
+    provide a handler for.
+
+    As always, documentation for Message Processors can be found on the Torquebox site:
+    http://torquebox.org/documentation/LATEST/messaging.html#messaging-consumers
+    DESC
     method_option :queue, :type => :string, :desc => "Name of the queue (/queues/my_queue_name:)"
     method_option :topic, :type => :string, :desc => "Name of the topic (/topics/my_topic_name:)"
     method_option :handler_class, :type => :string
@@ -130,24 +146,37 @@ module Tbox
         puts "You must specify either a topic or a queue you're configuring a handler for"
       else
         if options.handler_class
-          y = ConfigFile.new
-          messaging = y.config["messaging"] || {}
+          y = ConfigFile.new destination_root
+          messaging = y.add_config["messaging"] || {}
           if options.queue
             messaging[options.queue] = options.handler_class
           elsif options.topic
             messaging[options.topic] = options.handler_class
           end
-          y.config["messaging"] = messaging
+          y.add_config["messaging"] = messaging
           puts y.yaml
+          replace_yaml(y.yaml)
         else
           puts "You must specify a --handler-class"
         end
       end
     end
 
-    desc "add task", "Task"
+    desc "add task", "Add a Task"
+    method_option :name, :type => :string, :desc => "Class Name of Task (MyTaskName)", :required => true
+    method_option :concurrency, :type => :numeric, :desc => "Number of concurrent messages you want to handle"
     def task
-      puts "add some task"
+      y = ConfigFile.new destination_root
+      if options.name
+        if options.concurrency
+          y.add_config('tasks', options.name, { "concurrency" => options.concurrency })
+        else
+          y.add_config('tasks', options.name)
+        end
+        replace_yaml(y.yaml)
+      else
+        puts "Need to specify at least the --name of your Task class"
+      end
     end
 
     desc "add job", "Jobs"
