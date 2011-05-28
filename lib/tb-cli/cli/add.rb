@@ -75,22 +75,42 @@ module Tbox
     end
 
     desc "add environment", "Add an environment variable, such as MAIL_HOST or REPLY_TO"
-    method_option :options, :type => :hash, :desc => "Add options as you need them: MAIL_HOST:server REPLY_TO:emailaddress, etc., etc."
+    method_option :options, :type => :hash, :desc => "Add options as you need them: --options=MAIL_HOST:server REPLY_TO:emailaddress, etc., etc."
     def environment
       y = ConfigFile.new destination_root
-      options.each_pari { |k,v|
+      options.options.each_pair { |k,v|
         y.add_config('environment', k, v)
       }
       replace_yaml(y.yaml)
     end
 
-    desc "add queue", "Queue"
+    desc "add queue", "Add a Queue to your application"
+    long_desc <<-DESC
+    Queues are a messaging component that can be often used in load balancing situations.  For sending and receiving
+    messages, you define a topic to queue up all of the work to be done, and subscribe a number of queue handlers
+    to retrieve messages off of the queue as the work arrives.  Adding a queue to your application is pretty easy. 
+    Just add the --name=queue_name.  An additional option --not_durable, can be appended to prevent any messages from
+    being written to disk in case of server failure.  By default, all queues are durable, but if you want to disable this
+    functionality, you can do so.
+
+    Much more detailed documentation on queues and topics can be found on the Torquebox site, including documentation
+    on how to interact with a queue, sending and receiving messages and the like:
+
+    http://torquebox.org/documentation/1.0.1/messaging.html
+    DESC
     method_option :name, :type => :string, :required => true
-    method_option :durable => false
+    method_option :not_durable, :type => :boolean, :default => false, :desc => "Disable Durable subscriber (at your own risk)"
     def queue
-      y = ConfigFile.new
-      y.add_config('queues', "/queues/#{options.name}")
-      replace_yaml(y.yaml)
+      file = 'queues.yml'
+      y = ConfigFile.new destination_root, file
+      if (options.not_durable && options.name)
+        y.add_config("/queues/#{options.name}", "durable: #{!options.not_durable}")
+      elsif (options.name)
+        y.add_config("/queues/#{options.name}")
+      end
+      #require 'pry'
+      #binding.pry
+      replace_yaml(y.yaml, file) 
     end
 
     desc "add topic", "Topic"
@@ -192,10 +212,10 @@ module Tbox
 
     no_tasks do
 
-      def replace_yaml(yaml_f)
+      def replace_yaml(yaml_f, file='torquebox.yml')
         puts "Saving:\n"
-        remove_file('torquebox.yml')
-        create_file('torquebox.yml', yaml_f)
+        remove_file(file)
+        create_file(file, yaml_f)
       end
     end
   end

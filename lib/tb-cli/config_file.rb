@@ -4,8 +4,9 @@ module Tbox
 
     attr_accessor :config, :torquebox_yml
 
-    def initialize(destination_root=nil)
-      @torquebox_yml = File.join(destination_root, '/torquebox.yml')
+    def initialize(destination_root=nil, file='torquebox.yml')
+      @filename = file
+      @torquebox_yml = File.join(destination_root, @filename)
       if config_present?
         @config = YAML.load_file @torquebox_yml
       else
@@ -36,11 +37,12 @@ module Tbox
     #     ---
     #     topics:
     #       some_topic_name:
-    def add_config(meth, config, value=nil)
-      conf = @config[meth.to_s] || {}
-      conf[config.to_s] = value
-      @config[meth.to_s] = conf
-      puts "Current torquebox.yml configuration file:\n\n#{yaml}\n"
+    def add_config(root, config=nil, value=nil)
+      conf = @config[root.to_s] || {}
+      conf[config.to_s] = value if config
+      @config[root.to_s] = nil  # Some attributes need no settings and just exist, like queues.yml
+      @config[root.to_s] = conf unless conf.empty?
+      puts "Current #{@filename} configuration file:\n\n#{yaml}\n"
     end
 
     def remove_config(meth, config)
