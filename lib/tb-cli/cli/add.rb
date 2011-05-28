@@ -217,26 +217,22 @@ module Tbox
       :required => true
     method_option :bounded, :type => :hash, :desc => "min:1, max:3, etc"
     method_option :shared, :type => :boolean, :desc => "use this if not using bounded pooling"
+    method_option :global, :type => :boolean, :desc => "if not using bounded or shared"
     def pooling
+      y = ConfigFile.new destination_root
       thing = {}
       thing["pooling"] = {}
-      case options.subsystem
-      when 'web'
+      if [ 'web', 'jobs', 'messaging', 'services' ].include? options.subsystem
         if options.bounded
-          puts options.bounded
-          thing["pooling"]["web"] = options.bounded
-          puts thing.to_yaml
+          y.add_config('pooling', options.subsystem, options.bounded)
         elsif options.shared
-          thing["pooling"]["web"] = "shared"
+          y.add_config('pooling', options.subsystem, 'shared')
+        elsif options.global
+          y.add_config('pooling', options.subsystem, 'global')
         end
-      when 'jobs'
-        puts "using a jobs pooling"
-      when 'messaging'
-        puts "using messaging"
-      when 'services'
-        puts "using services"
+        replace_yaml(y.yaml)
       else
-        raise "Unknown subsystem.  Must be one of:\n  * web\n  * jobs\n  * messaging\n  * services"
+        puts "subsystem must be one of: web, job, messaging, or services"
       end
     end
 
