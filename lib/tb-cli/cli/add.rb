@@ -192,11 +192,15 @@ module Tbox
     end
 
     desc "add service", "Service"
-    method_option :name, :type => :string, :desc => "Service Name"
+    method_option :name, :type => :string, :desc => "Service Name", :required => true
     method_option :params, :type => :hash, :desc => "key:value pairs to supply for this service"
-    method_option :singleton, :type => :boolean, :desc => "Will this be a singleton operation?"
+    method_option :singleton, :type => :boolean, :desc => "Will this be a singleton operation?", :default => false
     def service
-      puts "add a service"
+      y = ConfigFile.new destination_root
+      opts = options.params
+      opts["singleton"] = true if options.singleton
+      y.add_config('services', options.name, opts)
+      replace_yaml(y.yaml)
     end
 
     desc "add auth", "Auth"
