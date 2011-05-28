@@ -167,28 +167,28 @@ module Tbox
     method_option :concurrency, :type => :numeric, :desc => "Number of concurrent messages you want to handle"
     def task
       y = ConfigFile.new destination_root
-      if options.name
-        if options.concurrency
-          y.add_config('tasks', options.name, { "concurrency" => options.concurrency })
-        else
-          y.add_config('tasks', options.name)
-        end
-        replace_yaml(y.yaml)
+      if options.concurrency
+        y.add_config('tasks', options.name, { "concurrency" => options.concurrency })
       else
-        puts "Need to specify at least the --name of your Task class"
+        y.add_config('tasks', options.name)
       end
+      replace_yaml(y.yaml)
     end
 
-    desc "add job", "Jobs"
+    desc "add job", "Add a scheduled job"
     method_option :job_name, :type => :string, :required => true
-    method_option :cron, :type => :string, :required => true, :desc => <<-CRON
-    crontab-like entry,  Similar to the following:
-      
-        '0 */5 * * * ?'
-    CRON
+    method_option :job_class, :type => :string, :required => true, :desc => "Class for the Job (Mail::Notifier)"
+    method_option :cron, :type => :string, :required => true, 
+                  :desc => "crontab-like entry,  Similar to the following: '0 */5 * * * ?'"
     method_option :description, :type => :string, :desc => "Optional Description"
     def job
-      puts "job was attempted to be created"
+      y = ConfigFile.new destination_root
+      opts = {}
+      opts['job'] = options.job_class
+      opts['cron'] = options.cron
+      opts['description'] = options.description if options.description
+      y.add_config('jobs', options.job_name, opts)
+      replace_yaml(y.yaml)
     end
 
     desc "add service", "Service"
