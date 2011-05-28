@@ -1,6 +1,7 @@
 module Tbox
+  # Class for adding components to your `torquebox.yml`, `queues.yml` or
+  # `topics.yml` file.
   class Add < Thor
-
     include Thor::Actions
 
     desc "add application", "Application"
