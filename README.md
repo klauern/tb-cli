@@ -7,34 +7,43 @@ Usage
 
     tb [action] [options]
 
+Actions that you can perform are `rack` and `add`, which can be described
+below.
+
+=== `tb add`
+Add a component to your torquebox.yml
 Why
 ---
-
 Torquebox is a really awesome project and I was interested in doing something
 with the efforts.  Since there didn't appear to be any project-generator-type
 thing in place, I decided to make one.  This is as much an experiment with
 Thor as it is an interest in making Torquebox have a command-line application
 that you can create and spin up quick TB apps.
 
+Obviously, if you find bugs, report them, throw a pull request my way, and
+feel free to critique the hell out of this.  I obviously have the right to
+feel offended and ignore you, but I'll try not to be. ;)
+
 List of actions
 ---------------
 There are 3 core things I'm trying to tackle:
 
   * `tb add` - Add a component (topic, queue, job, task, config, etc) to your
-    `torquebox.yml` file
-  * `tb remove` - Remove one of those
+    `torquebox.yml`, `queues.yml`, or `topics.yml` files
   * `tb rack` - Generate a project skeleton for your Rack apps
 
 There is a great `template.rb` that is out there for Rails-based apps that you
 want to run on Torquebox.  If that's what you're after, please go there and use
-that:
+that instead:
 
     rails new my_app -m $TORQUEBOX_HOME/share/rails/template.rb
 
 Details on Actions
 ------------------
-  * `tb init` - initialize and create your `torquebox.yml` file for your project
   * `tb add [component]` - add a component to your torquebox application.
+    Believe me, Torquebox is awesome, and it's because of these components that
+    I find them incredibly tantilizing.
+
     Types of components can be:
       * `application` - Application types
       * `web` - WEb configuration settings
@@ -51,42 +60,5 @@ Details on Actions
       * `auth` - configure your authorization settings
       * `pooling` - Runtime pooling options
 
-Not all application components are implemented.  See documentation below for
-more information what is and isn't implemented:
-
-### application
-To Be Implemented
-
-### web
-To Be Implemented
-
-### ruby
-To Be Implemented
-
-### environment
-To Be Implemented
-
-### queue
-To Be Implemented
-
-### topic
-To Be Implemented
-
-### messaging
-To Be Implemented
-
-### task
-To Be Implemented
-
-### job
-To Be Implemented
-
-### service
-To Be Implemented
-
-### auth
-To Be Implemented
-
-### pooling
-To Be Implemented
-
+For help with any component you wnat to add, you can get help by typing `tb add
+help [component]`, and you'll get some help.
