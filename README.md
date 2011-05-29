@@ -16,20 +16,21 @@ that make writing Rack and Rails-based applications a breeze, such as messaging
 features, background services, cron-like tasks, and service pooling.
 
   Types of components can be:
-    * `application` - Application types
-    * `web` - WEb configuration settings
-    * `ruby` - version of ruby you want to set, including compilation options
-    * `environment` - add and remove environment variables for the runtime of
-      your JRuby App
-    * `queue` - manipulate queues (create, rename, remove)
-    * `topic` - create a topic
-    * `messaing` - set up handlers for your queues/topics
-    * `task` - create a task with a concurrency setting
-    * `job` - create an external job, including various settings around it
-      (job class, description, crontab)
-    * `service` - Create a long-running service that runs in the background
-    * `auth` - configure your authorization settings
-    * `pooling` - Runtime pooling options
+
+   * `application` - Application types
+   * `web` - WEb configuration settings
+   * `ruby` - version of ruby you want to set, including compilation options
+   * `environment` - add and remove environment variables for the runtime of
+     your JRuby App
+   * `queue` - manipulate queues (create, rename, remove)
+   * `topic` - create a topic
+   * `messaing` - set up handlers for your queues/topics
+   * `task` - create a task with a concurrency setting
+   * `job` - create an external job, including various settings around it
+     (job class, description, crontab)
+   * `service` - Create a long-running service that runs in the background
+   * `auth` - configure your authorization settings
+   * `pooling` - Runtime pooling options
 
 For help with any component you want to add, you can get help by typing `tb add
 help [component]`, and you'll get some help.
@@ -37,13 +38,14 @@ help [component]`, and you'll get some help.
 ### Create baseline Torquebox-Rack app with `tb rack`
 Generate a Rack-based application.  A normal Rack-based Torquebox application
 only needs a few files, which this generator helps fill out for you:
-  * `project_name` folder
-  * `project_name/config.ru` - Your Rackup file
-  * `project_name/lib` directory
-  * `project_name/app.rb` base application file that starts Rack
-  * `project_name/Rakefile` with [Torquebox specific rake tasks][3]
-  * `project_name/torquebox.yml` - Your Torquebox config file
-  * `project_name/Gemfile` if you decide to use it as a Gem
+
+   * `project_name` folder
+   * `project_name/config.ru` - Your Rackup file
+   * `project_name/lib` directory
+   * `project_name/app.rb` base application file that starts Rack
+   * `project_name/Rakefile` with [Torquebox specific rake tasks][3]
+   * `project_name/torquebox.yml` - Your Torquebox config file
+   * `project_name/Gemfile` if you decide to use it as a Gem
 
 
 More Help
