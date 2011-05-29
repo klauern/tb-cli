@@ -1,9 +1,19 @@
 module Tbox
+  # ConfigFile class provides some simple YAML configuration file helpers.
+  # While normal YAML methods within Ruby are fine (and used heavily), these
+  # helpers assist in adding, removing, and replacing configurations for the
+  # Torquebox.yml default specification file.  These methods make adding
+  # a config to the torquebox.yml much easier, as it abstracts out the details
+  # of having to know the underlying data structure (Hashes, Arrays, boolean,
+  # string) and just pass in to this ConfigFile the pieces you want to add
   class ConfigFile
     require 'yaml'
 
     attr_accessor :config, :torquebox_yml
 
+    # Create and/or open a YAML configuration file
+    # [destination_root] Directory that you will find the YAML file
+    # [file] Filename of the YAML file to load
     def initialize(destination_root=nil, file='torquebox.yml')
       @filename = file
       @torquebox_yml = File.join(destination_root, @filename)
@@ -14,10 +24,12 @@ module Tbox
       end
     end
 
+    # Is the configuration file there or does a new config there to laod?
     def config_present?
       File.exist? @torquebox_yml
     end
 
+    # Convert config to YAML
     def yaml
       @config.to_yaml
     end
@@ -45,6 +57,7 @@ module Tbox
       puts "Current #{@filename} configuration file:\n\n#{yaml}\n"
     end
 
+    # Not tested or documented
     def remove_config(meth, config)
       conf = @config[meth.to_s]
       unless conf

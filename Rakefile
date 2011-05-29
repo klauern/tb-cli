@@ -1,18 +1,18 @@
-#require 'rake/clean'
-require 'rdoc'
+gem 'rdoc'
 require 'rdoc/task'
+require 'rake/clean'
 require 'bundler'
 
 Bundler::GemHelper.install_tasks
 
-# How the hell is this broken?
-# 
-#CLOBBER.include( 'pkg/', 'doc/' )
+CLEAN.include('*.tmp')
+CLOBBER.include('*.tmp', 'pkg/', 'html/')
 
-task :default => ["spec", "build"]
+# Default is to build and generate docs.  No tests yet, so can't do that
+task :default => ["build", "rdoc"]
 
-# And this, too...
+# Document gem and place in html/
 Rake::RDocTask.new do |rd|
+  rd.main = "README.md"
   rd.rdoc_files.include("lib/**/*.rb", "README.md")
-  rd.options << "--o doc"
 end

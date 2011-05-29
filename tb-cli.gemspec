@@ -9,17 +9,19 @@ Gem::Specification.new do |s|
   s.authors     = ["Nick Klauer"]
   s.email       = ["klauer@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Create simple Torquebox templates for your Rack-based applications.}
-  s.description = %q{In creating a new Torquebox integration, there are a few common files that you could
-                     use to set up your context to deploy to, what the name of the app is, and other 
-                     general-purpose deployment information.  Simplify that with this command-line gem.}
+  s.summary     = %q{Create simple Torquebox.yml templates for your Torquebox, Rack-based applications.}
+  s.description = %q{Torquebox (http://www.torquebox.org) is a JBoss Application Server that will run your
+  Rack and Rails apps in JRuby.  Torquebox provides a number of additional functionality that you might find useful, such
+  as messaging, background services, and scheduled tasks.  Configuring those is incredibly easy, since they all rely on
+  simple YAML file configs.  This CLI application simplifies that further by lettnig you generate your applications and
+  application templates with simple command line executions.}
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "sinatra"
   s.add_dependency "thor"
 
   s.executables << "tb"
-  
+
   s.rubyforge_project = "tb-cli"
 
   s.files         = `git ls-files`.split("\n")

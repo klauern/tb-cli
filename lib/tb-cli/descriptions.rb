@@ -1,4 +1,5 @@
-    ADD = <<-COMPONENT
+# Description for when you pass in the 'add' method execution.
+ADD = <<-COMPONENT
 Add a new component to the torquebox.yml file.  The type of component can be:
 
   - application
@@ -15,35 +16,12 @@ Add a new component to the torquebox.yml file.  The type of component can be:
   - pooling
 
 For more help on a particular subcommand, enter
-  
+
   tb add help [component]
 
-  COMPONENT
+COMPONENT
 
-  REMOVE = <<-COMPONENT
-Remove a component from your torquebox.yml file.  Types of things
-to remove can be the same as with add:
-
-  - application
-  - web
-  - ruby
-  - environment
-  - queue
-  - topic
-  - messaging
-  - task
-  - job
-  - service
-  - auth
-  - pooling
-
-For more help on a particular subcommand, enter
-  
-  tb remove help [component]
-
-  COMPONENT
-
-  MESSAGING_LONG = <<-MSG
+MESSAGING_LONG = <<-MSG
 Messaging
 =========
 For more information, go to (http://torquebox.org/documentation/1.0.0/messaging.html#messaging-consumers) for information (figure 8.15, specifically):
@@ -60,9 +38,9 @@ For more information, go to (http://torquebox.org/documentation/1.0.0/messaging.
       MyBarHandler:
         durable: true
 
-  MSG
+MSG
 
-  RACK = <<-RCK
+RACK = <<-RCK
 Create a new Rack Application template.  By default, will generate the following:
 
   project_folder
@@ -74,4 +52,4 @@ Create a new Rack Application template.  By default, will generate the following
 Much of this would be much similar to a rails app, but if you 
 have an interest in doing something more lightweight, you might
 find this template more appealing and minimal.
-  RCK
+RCK

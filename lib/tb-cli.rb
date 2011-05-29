@@ -4,6 +4,8 @@ require 'thor'
 require 'thor/group'
 
 module Tbox
+  # Base Command Line interface.  Registers the two major Thor tasks (Rack and
+  # Add).
   class Cli < Thor
     require 'tb-cli/camel_case'
     require 'tb-cli/descriptions'
@@ -14,6 +16,7 @@ module Tbox
     register Tbox::Add, "add", "add [component]", ADD
     register Tbox::Rack, "rack", "rack [project_name]", RACK
 
+    # Default help message when nothing is passed in
     def help(meth=nil)
       puts BANNER
       super
@@ -25,6 +28,7 @@ module Tbox
       super
     end
 
+    # Default Help Message banner.
     BANNER = <<-BAN
 Torquebox CLI  
 

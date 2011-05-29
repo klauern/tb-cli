@@ -62,21 +62,25 @@ Why
 Torquebox is a really awesome project and I was interested in doing something
 with it.  Since there didn't appear to be any project-generator-type
 thing in place, I decided to make one.  This is as much an experiment with
-[Thor][2] as it is an interest in making Torquebox have a command-line application
-that you can spin up TB apps quickly.
+[Thor][2] as it is an interest in providing Torquebox a command-line application
+to spin up TB apps quickly.
 
 Obviously, if you find bugs, report them, throw a pull request my way, and
 feel free to critique the hell out of this.  This is my first project in the
 Ruby space, and I'm more interested in making this a good app, even if it's not
 entirely useful to anybody.
 
+### Note:
+I have no tests at all for this.  I'm interested in trying to test it, but I'm
+not entirely sure how I would test a command-line app when much of it's
+functionality is wrapped in Thor (which I trust to do its job) tasks and such.
 
 To Do
 =====
-I didn't anticipate needing much more than what this offers, but I have a small
-list of things I'd like to include to fill it out a bit:
+I don't have an interest in adding too many more features, but I have a small list of things
+I'd like to include to fill it out a bit:
 
-  * wrap rake tasks in the command-line app
+  * wrap [rake tasks][3]
   * include the [rails template generator][4] provided by the Torquebox team
 
   [1]: http://www.torquebox.org/
