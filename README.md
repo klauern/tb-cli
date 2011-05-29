@@ -10,7 +10,7 @@ Usage
 Actions that you can perform are `rack` and `add`, which can be described
 below.
 
-### `tb add`
+### Add component with `tb add`
 Add a component to your torquebox.yml.  Torquebox provides a number of features
 that make writing Rack and Rails-based applications a breeze, such as messaging
 features, background services, cron-like tasks, and service pooling.
@@ -34,7 +34,7 @@ features, background services, cron-like tasks, and service pooling.
 For help with any component you want to add, you can get help by typing `tb add
 help [component]`, and you'll get some help.
 
-### `tb rack`
+### Create baseline Torquebox-Rack app with `tb rack`
 Generate a Rack-based application.  A normal Rack-based Torquebox application
 only needs a few files, which this generator helps fill out for you:
   * `project_name` folder
